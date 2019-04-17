@@ -228,9 +228,6 @@ class CalendarDay extends Component {
 
 
     return (
-      <TouchableOpacity
-        onPress={this.props.onDateSelected.bind(this, this.props.date)}
-      >
         <View
           key={this.props.date}
           style={[
@@ -262,7 +259,6 @@ class CalendarDay extends Component {
             </View>
           )}
         </View>
-      </TouchableOpacity>
     );
   }
 }
