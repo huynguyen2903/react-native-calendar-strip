@@ -160,6 +160,22 @@ class CalendarDay extends Component {
     return null
   }
 
+  weeksDay = (date) => {
+    const weekday = [
+      "S",
+      "M",
+      "T",
+      "W",
+      "T",
+      "F",
+      "S"
+    ];
+  
+    const d = new Date(date).getDay();
+    const n = weekday[d];
+    return `${n}`;
+  }
+
   render() {
     // Defaults for disabled state
     let dateNameStyle = [styles.dateName, this.props.enabled ? this.props.dateNameStyle : this.props.disabledDateNameStyle];
@@ -226,11 +242,8 @@ class CalendarDay extends Component {
       padding: this.state.containerPadding
     };
 
-
+    console.log(`%c this.props.date`,'color: blue; font-weight: 600',this.props.date)
     return (
-      <TouchableOpacity
-        onPress={this.props.onDateSelected.bind(this, this.props.date)}
-      >
         <View
           key={this.props.date}
           style={[
@@ -241,17 +254,17 @@ class CalendarDay extends Component {
         >
           {this.props.showDayName && (
             <Text
-              style={[dateNameStyle, { fontSize: this.state.dateNameFontSize }]}
+              style={[dateNameStyle, { fontSize: this.state.dateNameFontSize}]}
               allowFontScaling={this.props.allowDayTextScaling}
             >
-              {this.props.date.format("ddd").toUpperCase()}
+              {this.weeksDay(this.props.date)}
             </Text>
           )}
           {this.props.showDayNumber && (
             <View>
               <Text
                 style={[
-                    { fontSize: this.state.dateNumberFontSize },
+                    { fontSize: this.state.dateNumberFontSize},
                     dateNumberStyle
                 ]}
                 allowFontScaling={this.props.allowDayTextScaling}
@@ -262,7 +275,6 @@ class CalendarDay extends Component {
             </View>
           )}
         </View>
-      </TouchableOpacity>
     );
   }
 }
